@@ -8,7 +8,12 @@
 
 // add an array of gifs to search, i chose some of my favorite movies and shows
 
-const buttons = ["The Office", "The Simpsons", "Harold & Kumar", "School of Rock", "Ron Swanson"];
+let buttons = ["The Office", "The Simpsons", "Harold & Kumar", "School of Rock", "Ron Swanson"];
+
+function savedButtons() {
+    let searchedButtons = JSON.parse(localStorage.getItem("buttons"));
+    buttons = searchedButtons;
+}
 
 // create an array of buttons for my favorites, along with a button to remove selected search
 
@@ -25,6 +30,7 @@ function displayButtons() {
         `;
         $(".recent-search").append(button)
     };
+    localStorage.setItem("buttons", JSON.stringify(buttons));
 };
 
 displayButtons();
