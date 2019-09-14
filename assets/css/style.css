@@ -1,0 +1,28 @@
+body {
+    background-image: url(../Images/background2.jpg);
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.recent-search {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.wrap-buttons {
+    border: 1px solid grey;
+    background-color: white;
+    margin-left: .5em;
+    margin-bottom: 1em;
+    border-radius: .5em;
+}
+
+.btn-delete {
+    border-right: 1px solid black;
+    border-radius: 0;
+}
+
