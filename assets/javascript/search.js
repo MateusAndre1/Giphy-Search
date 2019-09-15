@@ -24,7 +24,7 @@ function displayButtons() {
         
         const button = `
         <div class="wrap-buttons">
-        <button class="btn btn-delete fas fa-snowplow" data-name="${buttonName}"></button>
+        <button class="btn btn-delete fas fa-snowplow" data-name="${buttonName}" data-index="${i}"></button>
         <button class="btn btn-search" data-name="${buttonName}">${buttonName}</button>
         </div>
         `;
@@ -32,6 +32,8 @@ function displayButtons() {
     };
     localStorage.setItem("buttons", JSON.stringify(buttons));
 };
+
+savedButtons ();
 
 displayButtons();
 
@@ -42,5 +44,14 @@ $("#submit-button").on("click", function(event) {
     let value = $("#search").val().trim();
     buttons.push(value);
     displayButtons();
-    console.log("Value: ", value)
+    // console.log("Value: ", value)
 });
+
+function deleteBtn() {
+    let buttonDelete = $(this).attr("data-index");
+    buttons.splice(buttonDelete, 1);
+    displayButtons();
+    console.log("value: ", buttonDelete);
+};
+
+$(document).on("click", ".btn-delete", deleteBtn);
