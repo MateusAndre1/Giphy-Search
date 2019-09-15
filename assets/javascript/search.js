@@ -10,6 +10,8 @@
 
 let buttons = ["The Office", "The Simpsons", "Harold & Kumar", "School of Rock", "Ron Swanson"];
 
+// get items from localstorage so that when user refreshs their search stays
+
 function savedButtons() {
     let searchedButtons = JSON.parse(localStorage.getItem("buttons"));
     buttons = searchedButtons;
@@ -37,15 +39,7 @@ savedButtons ();
 
 displayButtons();
 
-// display search results from user with a new button
-
-$("#submit-button").on("click", function(event) {
-    event.preventDefault();
-    let value = $("#search").val().trim();
-    buttons.push(value);
-    displayButtons();
-    // console.log("Value: ", value)
-});
+// removes selected user search if they choose to delete it
 
 function deleteBtn() {
     let buttonDelete = $(this).attr("data-index");
@@ -54,4 +48,25 @@ function deleteBtn() {
     console.log("value: ", buttonDelete);
 };
 
+// display search results from user with a new button
+
+function createBtn (value) {
+    buttons.push(value);
+    displayButtons();
+}
+
+// create the value for use to search
+
+function searchGiphy(event) {
+    event.preventDefault();
+    let value = $("#search").val().trim();
+    createBtn(value);
+    
+    // console.log("Value: ", value)
+}
+
+// global events to be listened to
+
 $(document).on("click", ".btn-delete", deleteBtn);
+
+$("#submit-button").on("click", searchGiphy);
