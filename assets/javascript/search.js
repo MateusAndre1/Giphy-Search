@@ -59,13 +59,11 @@ function createBtn (value) {
     displayButtons();
 }
 
-function showGiphy(giphys) {
-    for (let i = 0; i < giphys.length; i++) {
-        const giphy = giphys[i];
-        let images = giphy.images;
-        const giphyZone = `
+function giphyTemplate(giphy) {
+    const images = giphy.images;
+    const template =`
         <div class="giphy">
-        <i class="far fa-star favorite bg-white" data-id="${giphy.id}" data-star="false">
+        <i class="far fa-star favorite" data-id="${giphy.id}" data-star="false">
         </i>
         <div class="giphy-image">
             <img src="${images.original.url}" data-still="${images.original_still.url}" data-animate="${images.original.url}" data-state="still">
@@ -81,6 +79,14 @@ function showGiphy(giphys) {
         </div>
       </div>
         `;
+
+    return template;
+}
+
+function showGiphy(giphys) {
+    for (let i = 0; i < giphys.length; i++) {
+        const giphy = giphys[i];
+        const giphyZone = giphyTemplate(giphy);
 
     $(".gif-content").append(giphyZone);
     }
