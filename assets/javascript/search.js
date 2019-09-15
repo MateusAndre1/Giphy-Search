@@ -20,11 +20,12 @@ const gifEndpoint = "https://api.giphy.com/v1/gifs/search?api_key=LtqywBXq9kH3OP
 
  console.log(buttons2)
 // create an array of buttons for my favorites, along with a button to remove selected search
+
 function savedButtons() {
     let searchedButtons = JSON.parse(localStorage.getItem("buttons"));
     buttons = searchedButtons;
     
-}
+};
 function displayButtons() {
     $(".my-search").empty();
     for (let i = 0; i < buttons2.length; i++) {
@@ -55,7 +56,7 @@ function displaySearched() {
     $(".recent-search").append(button)
     };
     localStorage.setItem("buttons", JSON.stringify(buttons));
-
+    
 };
 
 // get items from localstorage so that when user refreshs their search stays
@@ -82,9 +83,10 @@ function deleteBtn() {
 function createBtn (value) {
     buttons.push(value);
     displaySearched();
-}
-displaySearched();
+};
 
+savedButtons();
+displaySearched();
 
 // make another function to add the elements to display the gifs to make it easier to see
 
@@ -135,7 +137,7 @@ function getGiphy(value) {
     .catch(function(error) {
         // console.log("Error: ", error)
     });
-}
+};
 
 // create the value for use to search
 
@@ -146,7 +148,7 @@ function searchGiphy(event) {
     getGiphy(value);
     $("#search").val("");
     // console.log("Value: ", value)
-}
+};
 
 // be able to click on the image/playbutton to begin the giphy animation, and click again to make it still
 
@@ -169,9 +171,9 @@ function playGiphy() {
             src: still,
             "data-state": "still"
         });
-    }
+    };
 
-}
+};
 
 // create a temporary element to retrieve the users selected image to be able to save it to their copy clipboard
 
@@ -181,7 +183,7 @@ function clipLink(value) {
     tempElement.val(value).select();
     document.execCommand("copy");
     tempElement.remove();
-}
+};
 
 // copy the users select image
 
@@ -191,7 +193,7 @@ function copyLink () {
     clipLink(link);
     $(this).html("Copy Completed!!");
     setTimeout(() => $(this).html(preCopy), 3000)
-}
+};
 
 // allow searched buttons to be clicked to pull up a search
 
@@ -201,7 +203,7 @@ function btnSearch () {
     $(".btn").parent().removeClass("active");
     parent.addClass("active");
     getGiphy(btnName);
-}
+};
 
 // allow user to clear the giphy content area
 
@@ -209,7 +211,7 @@ function clearResult(event) {
     event.preventDefault();
     $(".btn").parent().removeClass("active");
     $(".gif-content").html(`<p class="cleared">Results have been cleared!</p>`);
-}
+};
 
 // global events to be listened to
 
