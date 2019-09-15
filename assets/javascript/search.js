@@ -9,7 +9,7 @@
 // add an array of gifs to search, i chose some of my favorite movies and shows
 
 let buttons2 = ["The Office", "The Simpsons", "Dragonballz", "School of Rock", "Ron Swanson"];
-let buttons = [];
+
 
 
 
@@ -32,6 +32,7 @@ function displayButtons() {
         </div>
         `;
         $(".recent-search").append(button);
+        let buttons = [];
         for (let i = 0; i < buttons.length; i++) {
             let buttonName2 = buttons[i];
             let button = `
@@ -45,7 +46,7 @@ function displayButtons() {
         
     };
     
-    localStorage.setItem("buttons", JSON.stringify(buttons2));
+    localStorage.setItem("buttons", JSON.stringify(buttons));
 };
 
 // get items from localstorage so that when user refreshs their search stays
@@ -53,7 +54,7 @@ function displayButtons() {
 
 function savedButtons() {
     let searchedButtons = JSON.parse(localStorage.getItem("buttons"));
-    buttons2 = searchedButtons;
+    buttons = searchedButtons;
     
 }
 savedButtons ();
