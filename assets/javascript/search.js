@@ -8,7 +8,7 @@
 
 // add an array of gifs to search, i chose some of my favorite movies and shows
 
-let buttons = ["The Office", "The Simpsons", "Harold & Kumar", "School of Rock", "Ron Swanson"];
+let buttons = ["The Office", "The Simpsons", "Dragonballz", "School of Rock", "Ron Swanson"];
 
 const apiKey = "LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR";
 
@@ -117,6 +117,7 @@ function searchGiphy(event) {
     let value = $("#search").val().trim();
     createBtn(value);
     getGiphy(value);
+    $("#search").val("");
     // console.log("Value: ", value)
 }
 
@@ -158,8 +159,27 @@ function clipLink(value) {
 // copy the users select image
 
 function copyLink () {
-    const link = $(this).attr("data-link")
+    const link = $(this).attr("data-link");
+    const preCopy = $(this).html();
     clipLink(link);
+    $(this).html("Copy Completed!!");
+    setTimeout(() => $(this).html(preCopy), 3000)
+}
+
+// allow searched buttons to be clicked to pull up a search
+
+function btnSearch () {
+    let btnName = $(this).attr("data-name");
+    const parent = $(this).parent();
+    $(".btn").parent().removeClass("active");
+    parent.addClass("active");
+    getGiphy(btnName);
+}
+
+function clearResult(event) {
+    event.preventDefault();
+    $(".btn").parent().removeClass("active");
+    $(".gif-content").html(`<p class="cleared">Results have been cleared!</p>`);
 }
 
 // global events to be listened to
@@ -170,4 +190,8 @@ $(document).on("click", ".giphy-image", playGiphy);
 
 $(document).on("click", ".giphy-footer", copyLink);
 
+$(document).on("click", ".btn-search", btnSearch);
+
 $("#submit-button").on("click", searchGiphy);
+
+$("#clear-button").on("click", clearResult);

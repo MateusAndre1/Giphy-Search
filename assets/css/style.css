@@ -60,4 +60,11 @@ body {
     border-radius: .5em;
 }
 
+.active {
+    background-color: rgb(9, 168, 30);
+}
+
+.cleared {
+    font-size: 20px;
+}
 
