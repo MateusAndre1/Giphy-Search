@@ -59,23 +59,22 @@ function createBtn (value) {
     displayButtons();
 }
 
+// make another function to add the elements to display the gifs to make it easier to see
+
 function giphyTemplate(giphy) {
     const images = giphy.images;
     const template =`
-        <div class="giphy">
-        <i class="far fa-star favorite" data-id="${giphy.id}" data-star="false">
-        </i>
-        <div class="giphy-image">
-            <img src="${images.original.url}" data-still="${images.original_still.url}" data-animate="${images.original.url}" data-state="still">
-            <i class="fa fa-play img-play"></i>
+        <div class="giphy text-center mx-auto">
+        <div class="giphy-image text-center"><img src="${images.original_still.url}" data-still="${images.original_still.url}" data-animate="${images.original.url}" data-state="still">
+            <i class="fab fa-youtube"></i><i class="far fa-star favorite" data-id="${giphy.id}" data-star="false"></i>
         </div>
-        <div class="giphy-info text-white">
+        <div class="giphy-info">
             <p>Rating: g</p>
             <p>Posted A Year Ago</p>
         </div>
       
         <div class="giphy-footer" data-link="${giphy.embed_url}"> 
-            <p class="text-danger font-weight-bold">Copy Giphy Link <i class="fa fa-link"></i></p>
+            <p><i class="fas fa-external-link-alt"></i>Copy Giphy Link</p>
         </div>
       </div>
         `;
@@ -83,12 +82,14 @@ function giphyTemplate(giphy) {
     return template;
 }
 
+// after getting giphys from api render those in a loop for limit set and show it on the webpage
+
 function showGiphy(giphys) {
     for (let i = 0; i < giphys.length; i++) {
         const giphy = giphys[i];
         const giphyZone = giphyTemplate(giphy);
 
-    $(".gif-content").append(giphyZone);
+    $(".gif-content").prepend(giphyZone);
     }
 
 }
@@ -102,10 +103,10 @@ function getGiphy(value) {
     .then(function(response) {
         let giphys = response.data;
         showGiphy(giphys)
-        console.log("Giphy: ", giphys);
+        // console.log("Giphy: ", giphys);
     })
     .catch(function(error) {
-        console.log("Error: ", error)
+        // console.log("Error: ", error)
     });
 }
 

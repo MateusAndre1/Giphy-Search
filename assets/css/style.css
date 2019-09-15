@@ -26,3 +26,38 @@ body {
     border-radius: 0;
 }
 
+.gif-content {
+    column-count: 3;
+    column-gap: 1em;
+}
+
+.giphy {
+    background-color: rgb(9, 163, 168);
+    border: 1px solid grey;
+    border-radius: .5em;
+    page-break-inside: avoid;
+}
+
+.giphy img {
+    width: 100%;
+    height: 100%;
+}
+
+.fa-youtube {
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.favorite {
+    font-size: 1.6em;
+    margin-left: 80px;
+    cursor: pointer;
+}
+
+.giphy-footer {
+    border: 1px solid grey;
+    cursor: pointer;
+    border-radius: .5em;
+}
+
+
