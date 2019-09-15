@@ -122,6 +122,31 @@ function searchGiphy(event) {
 
 // global events to be listened to
 
+function playGiphy() {
+    const giphyPlay = $(this);
+    const img = giphyPlay.find("img");
+    const icon = giphyPlay.find("i");
+
+    const still = img.attr("data-still");
+    const animate = img.attr("data-animate");
+    const state = img.attr("data-state");
+
+    if (state === "still") {
+        img.attr({
+            src: animate,
+            "data-state": "animate"
+        });
+    } else {
+        img.attr({
+            src: still,
+            "data-state": "still"
+        });
+    }
+
+}
+
 $(document).on("click", ".btn-delete", deleteBtn);
+
+$(document).on("click", ".giphy-image", playGiphy);
 
 $("#submit-button").on("click", searchGiphy);
