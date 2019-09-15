@@ -10,6 +10,10 @@
 
 let buttons = ["The Office", "The Simpsons", "Harold & Kumar", "School of Rock", "Ron Swanson"];
 
+const apiKey = "LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR";
+
+const gifEndpoint = "https://api.giphy.com/v1/gifs/search?api_key=LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR";
+
 // get items from localstorage so that when user refreshs their search stays
 
 function savedButtons() {
@@ -55,13 +59,26 @@ function createBtn (value) {
     displayButtons();
 }
 
+function getGiphy(value) {
+    let url = gifEndpoint + "&q=" + value + "&limit=10";
+    
+    $.ajax({ url })
+    .then(function(response) {
+        let giphys = response.data;
+        console.log("Data: ", data);
+    })
+    .catch(function(error) {
+        console.log("Error: ", error)
+    });
+}
+
 // create the value for use to search
 
 function searchGiphy(event) {
     event.preventDefault();
     let value = $("#search").val().trim();
     createBtn(value);
-    
+    getGiphy(value);
     // console.log("Value: ", value)
 }
 
