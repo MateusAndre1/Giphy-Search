@@ -9,13 +9,13 @@
 // add an array of gifs to search, i chose some of my favorite movies and shows
 
 let buttons2 = ["The Office", "The Simpsons", "Dragonballz", "School of Rock", "Ron Swanson"];
-// let buttons = ["", "", "", "", ""];
+let buttons = [];
+
+
 
 const apiKey = "LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR";
 
 const gifEndpoint = "https://api.giphy.com/v1/gifs/search?api_key=LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR";
-
-// get items from localstorage so that when user refreshs their search stays
 
 
  console.log(buttons2)
@@ -24,24 +24,39 @@ const gifEndpoint = "https://api.giphy.com/v1/gifs/search?api_key=LtqywBXq9kH3OP
 function displayButtons() {
     $(".recent-search").empty();
     for (let i = 0; i < buttons2.length; i++) {
-        const buttonName = buttons2[i];
-        
-        const button = `
+        let buttonName = buttons2[i];
+        let button = `
         <div class="wrap-buttons">
         <button class="btn btn-delete fas fa-snowplow" data-name="${buttonName}" data-index="${i}"></button>
         <button class="btn btn-search" data-name="${buttonName}">${buttonName}</button>
         </div>
         `;
+        $(".recent-search").append(button);
+        for (let i = 0; i < buttons.length; i++) {
+            let buttonName2 = buttons[i];
+            let button = `
+        <div class="wrap-buttons">
+        <button class="btn btn-delete fas fa-snowplow" data-name="${buttonName2}" data-index="${i}"></button>
+        <button class="btn btn-search" data-name="${buttonName2}">${buttonName2}</button>
+        </div>
+        `;
         $(".recent-search").append(button)
+        }
+        
     };
     
     localStorage.setItem("buttons", JSON.stringify(buttons2));
 };
+
+// get items from localstorage so that when user refreshs their search stays
+
+
 function savedButtons() {
     let searchedButtons = JSON.parse(localStorage.getItem("buttons"));
     buttons2 = searchedButtons;
+    
 }
-savedButtons ()
+savedButtons ();
 displayButtons();
 
 
@@ -129,7 +144,7 @@ function searchGiphy(event) {
 function playGiphy() {
     const giphyPlay = $(this);
     const img = giphyPlay.find("img");
-    const icon = giphyPlay.find("i");
+    // const icon = giphyPlay.find("i");
 
     const still = img.attr("data-still");
     const animate = img.attr("data-animate");
