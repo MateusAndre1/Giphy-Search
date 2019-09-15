@@ -17,15 +17,15 @@ const apiKey = "LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR";
 
 const gifEndpoint = "https://api.giphy.com/v1/gifs/search?api_key=LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR";
 
-
- console.log(buttons2)
-// create an array of buttons for my favorites, along with a button to remove selected search
-
 function savedButtons() {
     let searchedButtons = JSON.parse(localStorage.getItem("buttons"));
     buttons = searchedButtons;
     
 };
+ console.log(buttons2)
+// create an array of buttons for my favorites, along with a button to remove selected search
+
+
 function displayButtons() {
     $(".my-search").empty();
     for (let i = 0; i < buttons2.length; i++) {
@@ -45,6 +45,7 @@ function displayButtons() {
 
 function displaySearched() {
     $(".recent-search").empty();
+    // buttons = [];
     for (let i = 0; i < buttons.length; i++) {
         let buttonName2 = buttons[i];
         let button = `
@@ -83,10 +84,14 @@ function deleteBtn() {
 function createBtn (value) {
     buttons.push(value);
     displaySearched();
+    
 };
 
-savedButtons();
+
 displaySearched();
+
+
+
 
 // make another function to add the elements to display the gifs to make it easier to see
 
