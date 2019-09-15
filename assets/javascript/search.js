@@ -9,8 +9,7 @@
 // add an array of gifs to search, i chose some of my favorite movies and shows
 
 let buttons2 = ["The Office", "The Simpsons", "Dragonballz", "School of Rock", "Ron Swanson"];
-
-
+let buttons = [""];
 
 
 const apiKey = "LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR";
@@ -27,55 +26,58 @@ function displayButtons() {
         let buttonName = buttons2[i];
         let button = `
         <div class="wrap-buttons">
-        <button class="btn btn-delete fas fa-snowplow" data-name="${buttonName}" data-index="${i}"></button>
         <button class="btn btn-search" data-name="${buttonName}">${buttonName}</button>
         </div>
         `;
         $(".recent-search").append(button);
-        let buttons = [];
-        for (let i = 0; i < buttons.length; i++) {
-            let buttonName2 = buttons[i];
-            let button = `
-        <div class="wrap-buttons">
-        <button class="btn btn-delete fas fa-snowplow" data-name="${buttonName2}" data-index="${i}"></button>
-        <button class="btn btn-search" data-name="${buttonName2}">${buttonName2}</button>
-        </div>
-        `;
-        $(".recent-search").append(button)
-        }
+        // buttons = [];
+        
         
     };
     
+};
+
+function displaySearched () {
+    for (let i = 0; i < buttons.length; i++) {
+        let buttonName2 = buttons[i];
+        let button = `
+    <div class="wrap-buttons">
+    <button class="btn btn-delete fas fa-snowplow" data-name="${buttonName2}" data-index="${i}"></button>
+    <button class="btn btn-search" data-name="${buttonName2}">${buttonName2}</button>
+    </div>
+    `;
+    $(".recent-search").append(button)
+    };
     localStorage.setItem("buttons", JSON.stringify(buttons));
 };
 
 // get items from localstorage so that when user refreshs their search stays
-
 
 function savedButtons() {
     let searchedButtons = JSON.parse(localStorage.getItem("buttons"));
     buttons = searchedButtons;
     
 }
+
 savedButtons ();
 displayButtons();
-
+displaySearched();
 
 
 // removes selected user search if they choose to delete it
 
 function deleteBtn() {
     let buttonDelete = $(this).attr("data-index");
-    buttons2.splice(buttonDelete, 1);
-    displayButtons();
+    buttons.splice(buttonDelete, 1);
+    displaySearched();
     // console.log("value: ", buttonDelete);
 };
 
 // display search results from user with a new button
 
 function createBtn (value) {
-    buttons2.push(value);
-    displayButtons();
+    buttons.push(value);
+    displaySearched();
 }
 
 // make another function to add the elements to display the gifs to make it easier to see
