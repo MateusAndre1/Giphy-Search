@@ -17,11 +17,8 @@ const gifEndpoint = "https://api.giphy.com/v1/gifs/search?api_key=LtqywBXq9kH3OP
 
 // get items from localstorage so that when user refreshs their search stays
 
-function savedButtons() {
-    let searchedButtons = JSON.parse(localStorage.getItem("buttons"));
-    buttons2 = searchedButtons;
-}
-//  console.log(buttons)
+
+ console.log(buttons2)
 // create an array of buttons for my favorites, along with a button to remove selected search
 
 function displayButtons() {
@@ -37,12 +34,17 @@ function displayButtons() {
         `;
         $(".recent-search").append(button)
     };
+    
     localStorage.setItem("buttons", JSON.stringify(buttons2));
 };
-
-savedButtons ();
-
+function savedButtons() {
+    let searchedButtons = JSON.parse(localStorage.getItem("buttons"));
+    buttons2 = searchedButtons;
+}
+savedButtons ()
 displayButtons();
+
+
 
 // removes selected user search if they choose to delete it
 
@@ -50,7 +52,7 @@ function deleteBtn() {
     let buttonDelete = $(this).attr("data-index");
     buttons2.splice(buttonDelete, 1);
     displayButtons();
-    console.log("value: ", buttonDelete);
+    // console.log("value: ", buttonDelete);
 };
 
 // display search results from user with a new button
