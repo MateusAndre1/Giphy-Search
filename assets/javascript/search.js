@@ -8,7 +8,8 @@
 
 // add an array of gifs to search, i chose some of my favorite movies and shows
 
-let buttons = ["The Office", "The Simpsons", "Dragonballz", "School of Rock", "Ron Swanson"];
+let buttons2 = ["The Office", "The Simpsons", "Dragonballz", "School of Rock", "Ron Swanson"];
+// let buttons = ["", "", "", "", ""];
 
 const apiKey = "LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR";
 
@@ -18,15 +19,15 @@ const gifEndpoint = "https://api.giphy.com/v1/gifs/search?api_key=LtqywBXq9kH3OP
 
 function savedButtons() {
     let searchedButtons = JSON.parse(localStorage.getItem("buttons"));
-    buttons = searchedButtons;
+    buttons2 = searchedButtons;
 }
-
+//  console.log(buttons)
 // create an array of buttons for my favorites, along with a button to remove selected search
 
 function displayButtons() {
     $(".recent-search").empty();
-    for (let i = 0; i < buttons.length; i++) {
-        const buttonName = buttons[i];
+    for (let i = 0; i < buttons2.length; i++) {
+        const buttonName = buttons2[i];
         
         const button = `
         <div class="wrap-buttons">
@@ -36,7 +37,7 @@ function displayButtons() {
         `;
         $(".recent-search").append(button)
     };
-    localStorage.setItem("buttons", JSON.stringify(buttons));
+    localStorage.setItem("buttons", JSON.stringify(buttons2));
 };
 
 savedButtons ();
@@ -47,7 +48,7 @@ displayButtons();
 
 function deleteBtn() {
     let buttonDelete = $(this).attr("data-index");
-    buttons.splice(buttonDelete, 1);
+    buttons2.splice(buttonDelete, 1);
     displayButtons();
     console.log("value: ", buttonDelete);
 };
@@ -55,7 +56,7 @@ function deleteBtn() {
 // display search results from user with a new button
 
 function createBtn (value) {
-    buttons.push(value);
+    buttons2.push(value);
     displayButtons();
 }
 
@@ -175,6 +176,8 @@ function btnSearch () {
     parent.addClass("active");
     getGiphy(btnName);
 }
+
+// allow user to clear the giphy content area
 
 function clearResult(event) {
     event.preventDefault();
