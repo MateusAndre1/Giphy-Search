@@ -120,7 +120,7 @@ function searchGiphy(event) {
     // console.log("Value: ", value)
 }
 
-// global events to be listened to
+// be able to click on the image/playbutton to begin the giphy animation, and click again to make it still
 
 function playGiphy() {
     const giphyPlay = $(this);
@@ -145,8 +145,29 @@ function playGiphy() {
 
 }
 
+// create a temporary element to retrieve the users selected image to be able to save it to their copy clipboard
+
+function clipLink(value) {
+    const tempElement = $("<input>");
+    $("body").append(tempElement);
+    tempElement.val(value).select();
+    document.execCommand("copy");
+    tempElement.remove();
+}
+
+// copy the users select image
+
+function copyLink () {
+    const link = $(this).attr("data-link")
+    clipLink(link);
+}
+
+// global events to be listened to
+
 $(document).on("click", ".btn-delete", deleteBtn);
 
 $(document).on("click", ".giphy-image", playGiphy);
+
+$(document).on("click", ".giphy-footer", copyLink);
 
 $("#submit-button").on("click", searchGiphy);
