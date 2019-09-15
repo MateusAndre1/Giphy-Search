@@ -59,13 +59,44 @@ function createBtn (value) {
     displayButtons();
 }
 
+function showGiphy(giphys) {
+    for (let i = 0; i < giphys.length; i++) {
+        const giphy = giphys[i];
+        let images = giphy.images;
+        const giphyZone = `
+        <div class="giphy">
+        <i class="far fa-star favorite bg-white" data-id="${giphy.id}" data-star="false">
+        </i>
+        <div class="giphy-image">
+            <img src="${images.original.url}" data-still="${images.original_still.url}" data-animate="${images.original.url}" data-state="still">
+            <i class="fa fa-play img-play"></i>
+        </div>
+        <div class="giphy-info text-white">
+            <p>Rating: g</p>
+            <p>Posted A Year Ago</p>
+        </div>
+      
+        <div class="giphy-footer" data-link="${giphy.embed_url}"> 
+            <p class="text-danger font-weight-bold">Copy Giphy Link <i class="fa fa-link"></i></p>
+        </div>
+      </div>
+        `;
+
+    $(".gif-content").append(giphyZone);
+    }
+
+}
+
+// call giphy api for data
+
 function getGiphy(value) {
     let url = gifEndpoint + "&q=" + value + "&limit=10";
     
     $.ajax({ url })
     .then(function(response) {
         let giphys = response.data;
-        console.log("Data: ", data);
+        showGiphy(giphys)
+        console.log("Giphy: ", giphys);
     })
     .catch(function(error) {
         console.log("Error: ", error)
