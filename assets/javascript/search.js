@@ -25,7 +25,7 @@ const gifEndpoint = "https://api.giphy.com/v1/gifs/search?api_key=LtqywBXq9kH3OP
 function savedButtons() {
     let searchedButtons = JSON.parse(localStorage.getItem("buttons") || "[]");
     buttons = searchedButtons;
-   
+
 };
 
 // create an array of buttons for my favorites
@@ -41,15 +41,17 @@ function displayButtons() {
         `;
         $(".my-search").append(button);
         // buttons = [];
-        
-        
+
+
     };
-    
+
 };
+
+// show buttons for user's search
 
 function displaySearched() {
     $(".recent-search").empty();
-    
+
     for (let i = 0; i < buttons.length; i++) {
         let buttonName2 = buttons[i];
         let button = `
@@ -58,10 +60,10 @@ function displaySearched() {
     <button class="btn btn-search" data-name="${buttonName2}">${buttonName2}</button>
     </div>
     `;
-    $(".recent-search").append(button)
+        $(".recent-search").append(button)
     };
     localStorage.setItem("buttons", JSON.stringify(buttons));
-    
+
 };
 
 // removes selected user search if they choose to delete it
@@ -76,10 +78,10 @@ function deleteBtn() {
 
 // display search results from user with a new button
 
-function createBtn (value) {
+function createBtn(value) {
     buttons.push(value);
     displaySearched();
-    
+
 };
 
 // make another function to add the elements to display the gifs to make it easier to see
@@ -88,7 +90,7 @@ function giphyTemplate(giphy) {
     const favoritesIndex = favorites.indexOf(giphy.id);
     const isFavorites = favoritesIndex !== -1 ? "fas" : "far";
     const images = giphy.images;
-    const template =`
+    const template = `
         <div class="giphy text-center mx-auto mb-4">
         <div class="giphy-image text-center"><img src="${images.original_still.url}" data-still="${images.original_still.url}" data-animate="${images.original.url}" data-state="still">
             <i class="fab fa-youtube"></i><i class="${isFavorites} fa-star favorite" data-id="${giphy.id}" data-star="${isFavorites}"></i>
@@ -113,7 +115,7 @@ function showGiphy(giphys) {
         const giphy = giphys[i];
         const giphyZone = giphyTemplate(giphy);
 
-    $(".gif-content").prepend(giphyZone);
+        $(".gif-content").prepend(giphyZone);
     };
 
 };
@@ -122,16 +124,18 @@ function showGiphy(giphys) {
 
 function getGiphy(value) {
     let url = gifEndpoint + "&q=" + value + "&limit=10";
-    
-    $.ajax({ url })
-    .then(function(response) {
-        let giphys = response.data;
-        showGiphy(giphys)
-        // console.log("Giphy: ", giphys);
-    })
-    .catch(function(error) {
-        // console.log("Error: ", error)
-    });
+
+    $.ajax({
+            url
+        })
+        .then(function (response) {
+            let giphys = response.data;
+            showGiphy(giphys)
+            // console.log("Giphy: ", giphys);
+        })
+        .catch(function (error) {
+            // console.log("Error: ", error)
+        });
 };
 
 // create the value for use to search
@@ -182,7 +186,7 @@ function clipLink(value) {
 
 // copy the users select image
 
-function copyLink () {
+function copyLink() {
     const link = $(this).attr("data-link");
     const preCopy = $(this).html();
     clipLink(link);
@@ -192,7 +196,7 @@ function copyLink () {
 
 // allow searched buttons to be clicked to pull up a search
 
-function btnSearch () {
+function btnSearch() {
     let btnName = $(this).attr("data-name");
     const parent = $(this).parent();
     $(".btn").parent().removeClass("active");
@@ -207,6 +211,8 @@ function clearResult(event) {
     $(".btn").parent().removeClass("active");
     $(".gif-content").html(`<p class="cleared">Results have been cleared!</p>`);
 };
+
+// save favorites to local storage so that they presist through refresh
 
 function saveFavorites() {
     localStorage.setItem("favorites", JSON.stringify(favorites));
@@ -226,7 +232,7 @@ function addFavorite(id) {
 
 function removeFavorite(id) {
     favorites = favorites.filter((el) => el != id);
-    saveFavorites(); 
+    saveFavorites();
 }
 
 function favoritesStar() {
@@ -243,13 +249,41 @@ function favoritesStar() {
     }
 };
 
+function renderFavorites(giphy) {
+    const giphyTemplate = createNewTemplate(giphy);
+    $(".gif-content").append(giphyTemplate);
+}
+
+function selectFavorites() {
+    const favoriteOnly = $(this).is(":checked")
+    if (favoriteOnly) {
+        $(".gif-content").empty();
+        for (let i = 0; i < favorites.length; i++) {
+            const id = favorites[i];
+            const url = `https://api.giphy.com/v1/gifs/${id}?api_key=LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR`;
+            $.ajax({
+                    url
+                })
+                .then((response) => {
+                    renderFavorites(response.data);
+                    console.log("Response: ", response);
+                })
+                .catch((error) => {
+                    console.log("Error: ", error);
+                });
+        }
+    } else {
+
+    }
+}
+
 function callApp() {
-    
+
     loadFavorites();
     displayButtons();
     savedButtons();
     displaySearched();
-    
+
 }
 
 callApp();
@@ -269,3 +303,5 @@ $(document).on("click", ".favorite", favoritesStar);
 $("#submit-button").on("click", searchGiphy);
 
 $("#clear-button").on("click", clearResult);
+
+$("#favoritesonly").on("click", selectFavorites);
