@@ -21,7 +21,11 @@ const gifEndpoint = "https://api.giphy.com/v1/gifs/search?api_key=LtqywBXq9kH3OP
 
  console.log(buttons2)
 // create an array of buttons for my favorites, along with a button to remove selected search
-
+function savedButtons() {
+    let searchedButtons = JSON.parse(localStorage.getItem("buttons") || "[]");
+    buttons = searchedButtons;
+   
+};
 
 function displayButtons() {
     $(".my-search").empty();
@@ -58,17 +62,12 @@ function displaySearched() {
 };
 
 // get items from localstorage so that when user refreshs their search stays
-function savedButtons() {
-    let searchedButtons = JSON.parse(localStorage.getItem("buttons"));
-    buttons = searchedButtons;
-    displayButtons();
-   
-};
 
 
+savedButtons();
 displaySearched();
 displayButtons();
-savedButtons();
+
 
 
 // removes selected user search if they choose to delete it
