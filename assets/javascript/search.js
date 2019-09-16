@@ -8,7 +8,7 @@
 
 // add an array of gifs to search, i chose some of my favorite movies and shows
 
-let buttons2 = ["The Office", "The Simpsons", "Dragonballz", "School of Rock", "Superbad", "Parks and Rec", "Ron Swanson"];
+let buttons2 = ["The Office", "The Simpsons", "Iron Man", "School of Rock", "Superbad", "Parks and Rec", "Ron Swanson", "Step Brothers"];
 
 let buttons = [];
 
@@ -19,13 +19,16 @@ const apiKey = "LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR";
 const gifEndpoint = "https://api.giphy.com/v1/gifs/search?api_key=LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR";
 
 
- console.log(buttons2)
-// create an array of buttons for my favorites, along with a button to remove selected search
+//  console.log(buttons2)
+
+// get items from localstorage so that when user refreshs their search stays
 function savedButtons() {
     let searchedButtons = JSON.parse(localStorage.getItem("buttons") || "[]");
     buttons = searchedButtons;
    
 };
+
+// create an array of buttons for my favorites
 
 function displayButtons() {
     $(".my-search").empty();
@@ -60,15 +63,6 @@ function displaySearched() {
     localStorage.setItem("buttons", JSON.stringify(buttons));
     
 };
-
-// get items from localstorage so that when user refreshs their search stays
-
-
-savedButtons();
-displaySearched();
-displayButtons();
-
-
 
 // removes selected user search if they choose to delete it
 
@@ -214,20 +208,51 @@ function clearResult(event) {
     $(".gif-content").html(`<p class="cleared">Results have been cleared!</p>`);
 };
 
+function saveFavorites() {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+}
+
+function loadFavorites() {
+    const stars = JSON.parse(localStorage.getItem("favorites"));
+    if (Array.isArray(stars)) {
+        favorites = stars;
+    }
+}
+
+function addFavorite(id) {
+    favorites.push(id);
+    saveFavorites();
+}
+
+function removeFavorite(id) {
+    favorites = favorites.filter((el) => el != id);
+    saveFavorites(); 
+}
+
 function favoritesStar() {
     const starState = $(this).attr("data-star");
     const id = $(this).attr("data-id");
     if (starState === "far") {
-        favorites.push(id);
-        localStorage.setItem("favorites", JSON.stringify(favorites));
+        addFavorite(id);
         $(this).removeClass("far").addClass("fas");
         $(this).attr("data-star", "fas");
     } else {
-        favorites = favorites.filter((el) => el != id);
+        removeFavorite(id);
         $(this).removeClass("fas").addClass("far");
         $(this).attr("data-star", "far");
     }
 };
+
+function callApp() {
+    
+    loadFavorites();
+    displayButtons();
+    savedButtons();
+    displaySearched();
+    
+}
+
+callApp();
 
 // global events to be listened to
 
