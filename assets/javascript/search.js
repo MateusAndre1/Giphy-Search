@@ -12,7 +12,7 @@ let buttons2 = ["The Office", "The Simpsons", "Dragonballz", "School of Rock", "
 
 let buttons = [];
 
-
+let favorites = [];
 
 const apiKey = "LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR";
 
@@ -88,12 +88,6 @@ function createBtn (value) {
     
 };
 
-
-
-
-
-
-
 // make another function to add the elements to display the gifs to make it easier to see
 
 function giphyTemplate(giphy) {
@@ -101,7 +95,7 @@ function giphyTemplate(giphy) {
     const template =`
         <div class="giphy text-center mx-auto mb-4">
         <div class="giphy-image text-center"><img src="${images.original_still.url}" data-still="${images.original_still.url}" data-animate="${images.original.url}" data-state="still">
-            <i class="fab fa-youtube"></i><i class="far fa-star favorite" data-id="${giphy.id}" data-star="false"></i>
+            <i class="fab fa-youtube"></i><i class="far fa-star favorite" data-id="${giphy.id}" data-star="far"></i>
         </div>
         <div class="giphy-info">
             <p>Rating: ${giphy.rating}</p>
@@ -115,7 +109,7 @@ function giphyTemplate(giphy) {
         `;
 
     return template;
-}
+};
 
 // after getting giphys from api render those in a loop for limit set and show it on the webpage
 
@@ -125,9 +119,9 @@ function showGiphy(giphys) {
         const giphyZone = giphyTemplate(giphy);
 
     $(".gif-content").prepend(giphyZone);
-    }
+    };
 
-}
+};
 
 // call giphy api for data
 
@@ -219,6 +213,17 @@ function clearResult(event) {
     $(".gif-content").html(`<p class="cleared">Results have been cleared!</p>`);
 };
 
+function favoritesStar() {
+    let starState = $(this).attr("data-star");
+    if (starState === "far") {
+        $(this).removeClass("far").addClass("fas");
+        $(this).attr("data-star", "fas");
+    } else {
+        $(this).removeClass("fas").addClass("far");
+        $(this).attr("data-star", "far");
+    }
+};
+
 // global events to be listened to
 
 $(document).on("click", ".btn-delete", deleteBtn);
@@ -228,6 +233,8 @@ $(document).on("click", ".giphy-image", playGiphy);
 $(document).on("click", ".giphy-footer", copyLink);
 
 $(document).on("click", ".btn-search", btnSearch);
+
+$(document).on("click", ".favorite", favorites);
 
 $("#submit-button").on("click", searchGiphy);
 
