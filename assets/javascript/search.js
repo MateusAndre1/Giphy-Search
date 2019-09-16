@@ -104,8 +104,8 @@ function giphyTemplate(giphy) {
             <i class="fab fa-youtube"></i><i class="far fa-star favorite" data-id="${giphy.id}" data-star="false"></i>
         </div>
         <div class="giphy-info">
-            <p>Rating: g</p>
-            <p>Posted A Year Ago</p>
+            <p>Rating: ${giphy.rating}</p>
+            <p>Title: ${giphy.title}</p>
         </div>
       
         <div class="giphy-footer" data-link="${giphy.embed_url}"> 
