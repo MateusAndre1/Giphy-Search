@@ -9,6 +9,7 @@
 // add an array of gifs to search, i chose some of my favorite movies and shows
 
 let buttons2 = ["The Office", "The Simpsons", "Dragonballz", "School of Rock", "Ron Swanson"];
+
 let buttons = [];
 
 
@@ -17,11 +18,7 @@ const apiKey = "LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR";
 
 const gifEndpoint = "https://api.giphy.com/v1/gifs/search?api_key=LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR";
 
-function savedButtons() {
-    let searchedButtons = JSON.parse(localStorage.getItem("buttons"));
-    buttons = searchedButtons;
-    
-};
+
  console.log(buttons2)
 // create an array of buttons for my favorites, along with a button to remove selected search
 
@@ -45,7 +42,7 @@ function displayButtons() {
 
 function displaySearched() {
     $(".recent-search").empty();
-    // buttons = [];
+    
     for (let i = 0; i < buttons.length; i++) {
         let buttonName2 = buttons[i];
         let button = `
@@ -61,12 +58,17 @@ function displaySearched() {
 };
 
 // get items from localstorage so that when user refreshs their search stays
+function savedButtons() {
+    let searchedButtons = JSON.parse(localStorage.getItem("buttons"));
+    buttons = searchedButtons;
+    displayButtons();
+   
+};
 
 
-
-
+displaySearched();
 displayButtons();
-
+savedButtons();
 
 
 // removes selected user search if they choose to delete it
@@ -88,7 +90,7 @@ function createBtn (value) {
 };
 
 
-displaySearched();
+
 
 
 
