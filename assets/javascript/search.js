@@ -91,17 +91,18 @@ function createBtn (value) {
 // make another function to add the elements to display the gifs to make it easier to see
 
 function giphyTemplate(giphy) {
+    const favoritesIndex = favorites.indexOf(giphy.id);
+    const isFavorites = favoritesIndex !== -1 ? "fas" : "far";
     const images = giphy.images;
     const template =`
         <div class="giphy text-center mx-auto mb-4">
         <div class="giphy-image text-center"><img src="${images.original_still.url}" data-still="${images.original_still.url}" data-animate="${images.original.url}" data-state="still">
-            <i class="fab fa-youtube"></i><i class="far fa-star favorite" data-id="${giphy.id}" data-star="far"></i>
+            <i class="fab fa-youtube"></i><i class="${isFavorites} fa-star favorite" data-id="${giphy.id}" data-star="${isFavorites}"></i>
         </div>
         <div class="giphy-info">
             <p>Rating: ${giphy.rating}</p>
             <p>Title: ${giphy.title}</p>
         </div>
-      
         <div class="giphy-footer" data-link="${giphy.embed_url}"> 
             <p><i class="fas fa-external-link-alt"></i>Copy Giphy Link</p>
         </div>
@@ -214,11 +215,15 @@ function clearResult(event) {
 };
 
 function favoritesStar() {
-    let starState = $(this).attr("data-star");
+    const starState = $(this).attr("data-star");
+    const id = $(this).attr("data-id");
     if (starState === "far") {
+        favorites.push(id);
+        localStorage.setItem("favorites", JSON.stringify(favorites));
         $(this).removeClass("far").addClass("fas");
         $(this).attr("data-star", "fas");
     } else {
+        favorites = favorites.filter((el) => el != id);
         $(this).removeClass("fas").addClass("far");
         $(this).attr("data-star", "far");
     }
@@ -234,7 +239,7 @@ $(document).on("click", ".giphy-footer", copyLink);
 
 $(document).on("click", ".btn-search", btnSearch);
 
-$(document).on("click", ".favorite", favorites);
+$(document).on("click", ".favorite", favoritesStar);
 
 $("#submit-button").on("click", searchGiphy);
 

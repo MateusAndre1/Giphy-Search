@@ -1,9 +1,8 @@
 body {
-    background-image: url(../Images/background4.png);
-    height: 100%;
+    background-image: url(../images/background2.jpg);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
+    background-size: 100% 100%;
     background-attachment: fixed;
 }
 
@@ -33,7 +32,7 @@ body {
 }
 
 .giphy {
-    background-color: rgba(12, 188, 204, 0.507);
+    background-color: rgba(106, 110, 110, 0.685);
     border: 1px solid grey;
     border-radius: .5em;
     page-break-inside: avoid;
@@ -55,6 +54,10 @@ body {
     cursor: pointer;
 }
 
+.fa-star {
+    color: rgba(251, 214, 4, 0.801);
+}
+
 .giphy-footer {
     border: 1px solid grey;
     cursor: pointer;
@@ -62,7 +65,7 @@ body {
 }
 
 .active {
-    background-color: rgba(9, 168, 30, 0.548);
+    background-color: rgba(106, 110, 110, 0.685);
 }
 
 .cleared {
