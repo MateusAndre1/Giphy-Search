@@ -33,7 +33,7 @@ body {
 }
 
 .giphy {
-    background-color: rgb(9, 163, 168);
+    background-color: rgba(12, 188, 204, 0.507);
     border: 1px solid grey;
     border-radius: .5em;
     page-break-inside: avoid;
@@ -62,7 +62,7 @@ body {
 }
 
 .active {
-    background-color: rgb(9, 168, 30);
+    background-color: rgba(9, 168, 30, 0.548);
 }
 
 .cleared {

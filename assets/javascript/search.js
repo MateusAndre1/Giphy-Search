@@ -8,7 +8,7 @@
 
 // add an array of gifs to search, i chose some of my favorite movies and shows
 
-let buttons2 = ["The Office", "The Simpsons", "Dragonballz", "School of Rock", "Ron Swanson"];
+let buttons2 = ["The Office", "The Simpsons", "Dragonballz", "School of Rock", "Superbad", "Parks and Rec", "Ron Swanson"];
 
 let buttons = [];
 
@@ -99,7 +99,7 @@ function createBtn (value) {
 function giphyTemplate(giphy) {
     const images = giphy.images;
     const template =`
-        <div class="giphy text-center mx-auto">
+        <div class="giphy text-center mx-auto mb-4">
         <div class="giphy-image text-center"><img src="${images.original_still.url}" data-still="${images.original_still.url}" data-animate="${images.original.url}" data-state="still">
             <i class="fab fa-youtube"></i><i class="far fa-star favorite" data-id="${giphy.id}" data-star="false"></i>
         </div>
