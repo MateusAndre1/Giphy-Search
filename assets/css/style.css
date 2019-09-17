@@ -71,4 +71,9 @@ body {
 .cleared {
     font-size: 20px;
 }
+.favoritesonly {
+    border: 1px solid grey;
+    border-radius: .5em;
+    background-color: rgba(31, 32, 32, 0.76);
+}
 

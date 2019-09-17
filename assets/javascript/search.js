@@ -20,6 +20,7 @@ const apiKey = "LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR";
 
 const gifEndpoint = "https://api.giphy.com/v1/gifs/search?api_key=LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR";
 
+let searchReturn = [];
 
 //  console.log(buttons2)
 
@@ -133,6 +134,7 @@ function getGiphy(value) {
         .then(function (response) {
             let giphys = response.data;
             showGiphy(giphys);
+            previousSearch = giphys;
             // console.log("Giphy: ", giphys);
         })
         .catch(function (error) {
@@ -145,8 +147,12 @@ function getGiphy(value) {
 function searchGiphy(event) {
     event.preventDefault();
     let value = $("#search").val().trim();
-    createBtn(value);
-    getGiphy(value);
+    if (buttons.includes(value)) {
+        console.log("This search already exists!")
+    } else {
+        createBtn(value);
+        getGiphy(value);
+    }
     $("#search").val("");
     // console.log("Value: ", value)
 };
@@ -271,7 +277,7 @@ function selectFavorites() {
                 });
         }
     } else {
-
+        showGiphy(previousSearch);
     }
 }
 
