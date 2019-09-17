@@ -11,7 +11,24 @@ body {
     background-repeat: no-repeat;
     background-position: fixed;
     background-size: cover;
-    min-height: 260px;
+    min-height: 300px;
+    font-family: Impact, "Charcoal", sans-serif;
+}
+
+h1 {
+    background-color: rgba(243, 9, 9, 0.465);
+    border-radius: .5em;
+}
+
+.btn2 {
+    color: white;
+    background-color: rgb(226, 13, 13);
+    font-family: Impact, "Charcoal", sans-serif;
+}
+
+.btn3 {
+    min-width: 90px;
+    font-family: Impact, "Charcoal", sans-serif;
 }
 
 .my-search, 
@@ -29,18 +46,23 @@ body {
     border-radius: .5em;
 }
 
+p {
+    font: 18px bold;
+    color: white;
+}
+
 .btn-delete {
     border-right: 1px solid black;
     border-radius: 0;
 }
 
 .gif-content {
-    column-count: 3;
+    column-count: 4;
     column-gap: 1em;
 }
 
 .giphy {
-    background-color: rgba(106, 110, 110, 0.685);
+    background-color: rgba(214, 14, 14, 0.274);
     border: 1px solid grey;
     border-radius: .5em;
     page-break-inside: avoid;
@@ -84,4 +106,12 @@ body {
     border-radius: .5em;
     background-color: rgba(31, 32, 32, 0.76);
 }
+
+@media (max-width: 768px) {
+    .gif-content
+        {
+            column-count: 1;
+            column-gap: 1em;
+        }
+    }
 

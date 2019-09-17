@@ -10,7 +10,7 @@
 
 $(document).ready(function() {
 
-let buttons2 = ["Hulk", "Star-Lord", "Thor", "Iron Man", "Spider-Man", "Groot", "Captain America"];
+let buttons2 = ["Hulk", "Star-Lord", "Thor", "Iron Man", "Spider-Man", "Groot", "Captain America", "Doctor Strange"];
 
 let buttons = [];
 
@@ -41,7 +41,7 @@ function displayButtons() {
         let buttonName = buttons2[i];
         let button = `
         <div class="wrap-buttons">
-        <button class="btn btn-search" data-name="${buttonName}">${buttonName}</button>
+        <button class="btn btn3 btn-search" data-name="${buttonName}">${buttonName}</button>
         </div>
         `;
         $(".my-search").append(button);
@@ -61,8 +61,8 @@ function displaySearched() {
         let buttonName2 = buttons[i];
         let button = `
     <div class="wrap-buttons">
-    <button class="btn btn-delete fas fa-snowplow" data-name="${buttonName2}" data-index="${i}"></button>
-    <button class="btn btn-search" data-name="${buttonName2}">${buttonName2}</button>
+    <button class="btn btn-delete fas fa-gavel" data-name="${buttonName2}" data-index="${i}"></button>
+    <button class="btn btn3 btn-search" data-name="${buttonName2}">${buttonName2}</button>
     </div>
     `;
         $(".recent-search").append(button)
@@ -241,7 +241,7 @@ function addFavorite(id) {
 }
 
 function removeFavorite(id) {
-    const favorites = favorites.filter((el) => el != id);
+    favorites = favorites.filter((el) => el != id);
     saveFavorites();
 }
 
