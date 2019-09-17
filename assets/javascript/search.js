@@ -12,6 +12,8 @@ let buttons2 = ["The Office", "The Simpsons", "Iron Man", "School of Rock", "Sup
 
 let buttons = [];
 
+let favoriteOnly = false;
+
 let favorites = [];
 
 const apiKey = "LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR";
@@ -130,7 +132,7 @@ function getGiphy(value) {
         })
         .then(function (response) {
             let giphys = response.data;
-            showGiphy(giphys)
+            showGiphy(giphys);
             // console.log("Giphy: ", giphys);
         })
         .catch(function (error) {
@@ -231,7 +233,7 @@ function addFavorite(id) {
 }
 
 function removeFavorite(id) {
-    favorites = favorites.filter((el) => el != id);
+    const favorites = favorites.filter((el) => el != id);
     saveFavorites();
 }
 
@@ -250,26 +252,22 @@ function favoritesStar() {
 };
 
 function renderFavorites(giphy) {
-    const giphyTemplate = createNewTemplate(giphy);
-    $(".gif-content").append(giphyTemplate);
+    const createNewTemplate = giphyTemplate(giphy);
+    $(".gif-content").append(createNewTemplate);
 }
 
 function selectFavorites() {
-    const favoriteOnly = $(this).is(":checked")
+    const favoriteOnly = $(this).is(":checked");
     if (favoriteOnly) {
         $(".gif-content").empty();
         for (let i = 0; i < favorites.length; i++) {
             const id = favorites[i];
-            const url = `https://api.giphy.com/v1/gifs/${id}?api_key=LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR`;
-            $.ajax({
-                    url
-                })
-                .then((response) => {
-                    renderFavorites(response.data);
-                    console.log("Response: ", response);
-                })
-                .catch((error) => {
-                    console.log("Error: ", error);
+            let url = `https://api.giphy.com/v1/gifs/${id}?api_key=LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR`;
+            $.ajax({ url })
+                .then((response) => 
+                    renderFavorites(response.data))
+                .catch(() => {
+                    console.log("Error: ",);
                 });
         }
     } else {
