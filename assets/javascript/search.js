@@ -8,7 +8,9 @@
 
 // add an array of gifs to search, i chose some of my favorite movies and shows
 
-let buttons2 = ["The Office", "The Simpsons", "Iron Man", "School of Rock", "Superbad", "Parks and Rec", "Ron Swanson", "Step Brothers"];
+$(document).ready(function() {
+
+let buttons2 = ["Hulk", "Star-Lord", "Thor", "Iron Man", "Spider-Man", "Groot", "Captain America"];
 
 let buttons = [];
 
@@ -287,10 +289,13 @@ function callApp() {
     displayButtons();
     savedButtons();
     displaySearched();
+    getGiphy("Thor");
 
 }
 
 callApp();
+
+
 
 // global events to be listened to
 
@@ -309,3 +314,5 @@ $("#submit-button").on("click", searchGiphy);
 $("#clear-button").on("click", clearResult);
 
 $("#favoritesonly").on("click", selectFavorites);
+
+});

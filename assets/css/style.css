@@ -1,9 +1,17 @@
 body {
-    background-image: url(../Images/background3.png);
+    background-image: url(../Images/capshieldbg.jpg);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 100% 100%;
+    background-size: cover;
     background-attachment: fixed;
+}
+
+.jumbotron {
+    background-image: url(../Images/background3.jpg);
+    background-repeat: no-repeat;
+    background-position: fixed;
+    background-size: cover;
+    min-height: 260px;
 }
 
 .my-search, 
