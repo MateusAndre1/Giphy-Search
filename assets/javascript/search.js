@@ -283,6 +283,12 @@ function selectFavorites() {
     }
 }
 
+function randomStart(arr) {
+    const i = Math.floor(Math.random () * arr.length);
+    const value = arr[i]
+    return value;
+}
+
 function disableSearch() {
     const value = $(this).val();
     if (value) {
@@ -293,12 +299,13 @@ function disableSearch() {
 }
 
 function callApp() {
+    const value = randomStart(buttons2)
 
     loadFavorites();
     displayButtons();
     savedButtons();
     displaySearched();
-    getGiphy("Thor");
+    getGiphy(value);
 
 }
 
