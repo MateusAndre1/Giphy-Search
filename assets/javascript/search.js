@@ -10,7 +10,7 @@
 
 $(document).ready(function() {
 
-let buttons2 = ["Hulk", "Star-Lord", "Thor", "Iron Man", "Spider-Man", "Groot", "Captain America", "Doctor Strange"];
+let buttons2 = ["Hulk", "Star-Lord", "Thor", "Iron Man", "Spider-Man", "Groot", "Captain America", "Doctor Strange", "Black Widow"];
 
 let buttons = [];
 
@@ -283,6 +283,15 @@ function selectFavorites() {
     }
 }
 
+function disableSearch() {
+    const value = $(this).val();
+    if (value) {
+        $("#submit-button").prop("disabled", false);
+    } else {
+        $("#submit-button").prop("disabled", true);
+    }
+}
+
 function callApp() {
 
     loadFavorites();
@@ -314,5 +323,7 @@ $("#submit-button").on("click", searchGiphy);
 $("#clear-button").on("click", clearResult);
 
 $("#favoritesonly").on("click", selectFavorites);
+
+$("#search").on("keyup", disableSearch);
 
 });
