@@ -131,7 +131,8 @@ function getGiphy(value) {
     let url = gifEndpoint + "&q=" + value + "&limit=10";
 
     $.ajax({
-            url
+        url: url,
+        method: "GET"
         })
         .then(function (response) {
             let giphys = response.data;
@@ -200,7 +201,7 @@ function copyLink() {
     const link = $(this).attr("data-link");
     const preCopy = $(this).html();
     clipLink(link);
-    $(this).html("Copy Completed!!");
+    $(this).html("<p>Copy Completed!!</p>");
     setTimeout(() => $(this).html(preCopy), 3000)
 };
 
@@ -271,7 +272,8 @@ function selectFavorites() {
         for (let i = 0; i < favorites.length; i++) {
             const id = favorites[i];
             let url = `https://api.giphy.com/v1/gifs/${id}?api_key=LtqywBXq9kH3OPnHFeNxDGKgsOFRqKyR`;
-            $.ajax({ url })
+            $.ajax({ url: url,
+                method: "GET"})
                 .then((response) => 
                     renderFavorites(response.data))
                 .catch(() => {

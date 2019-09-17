@@ -106,8 +106,15 @@ p {
     border-radius: .5em;
     background-color: rgba(31, 32, 32, 0.76);
 }
+@media (max-width: 900px) {
+    .gif-content
+        {
+            column-count: 2;
+            column-gap: 1em;
+        }
+    }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .gif-content
         {
             column-count: 1;
