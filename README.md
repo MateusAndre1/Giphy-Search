@@ -1,19 +1,18 @@
-# Giphy-Search
+# MCU Giphy Search!
 
-1. Before you can make any part of your site work, you need to create an array of strings, each one related to a topic that interests you. Save it to a variable called `topics`.
-   * We chose animals for our theme, but you can make a list to your own liking.
+## Looking for Giphys, and want to favorite them for later?
+Well you've come to the right place!
 
-2. Your app should take the topics in this array and create buttons in your HTML.
-   * Try using a loop that appends a button for each string in the array.
+[Search for Giphys!](https://mateusandre1.github.io/Giphy-Search/)
 
-3. When the user clicks on a button, the page should grab 10 static, non-animated gif images from the GIPHY API and place them on the page.
+![home](https://firebasestorage.googleapis.com/v0/b/meetographers-3edf6.appspot.com/o/giphy.png?alt=media&token=c74f61c1-3aa3-4527-9afb-d054321021f6)
 
-4. When the user clicks one of the still GIPHY images, the gif should animate. If the user clicks the gif again, it should stop playing.
+### Retrieved with an API call to giphy's database
 
-5. Under every gif, display its rating (PG, G, so on).
-   * This data is provided by the GIPHY API.
-   * Only once you get images displaying with button presses should you move on to the next step.
-
-6. Add a form to your page that takes a value from a user input box and adds it to your `topics` array. Then make a function call that takes each topic in the array and remakes the buttons on the page.
-
-7. Deploy your assignment to Github Pages.
+## Features
+* Predefined MCU Tabs
+* Create personal tabs
+* Favorite any Giphy (With the use of localstorage)
+* Show only Favorites!
+* Clear the search area
+* Easly copy the giphys link through the card!
